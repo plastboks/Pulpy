@@ -3,8 +3,8 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.md')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.md')).read()
+README = open(os.path.join(here, 'readme.md')).read()
+CHANGES = open(os.path.join(here, 'changes.md')).read()
 
 requires = [
     'pyramid',
@@ -14,6 +14,14 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+    'alembic',
+    'cryptacular',
+    'wtforms',
+    'webtest',
+    'nose',
+    'coverage',
+    'pep8',
+    'webhelpers',
     ]
 
 setup(name='pulpy',
