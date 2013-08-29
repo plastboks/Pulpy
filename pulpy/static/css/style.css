@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* CSS Document */
+
+* {
+  margin: 0px; 
+}
+
+body {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   font-weight: 300;
+   background: #eaeaea url('../images/bg.png')
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+}
+
+img {
+  border: none;
+}
+
+.corners5px {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+

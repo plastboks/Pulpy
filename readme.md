@@ -19,7 +19,7 @@ Installation
   * activate virtualenv `. venv/bin/activate`
   * clone this repo into venv directory (eg: venv/Pulpy)
   * run `pip install -e .` inside Pulpy directory
-  * run `initialize_pyrtos_db .ini`
+  * run `initialize_pulpy_db .ini`
   * run `pserve development.ini`
 
 

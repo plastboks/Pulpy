@@ -31,7 +31,6 @@ class User(Base):
     givenname -- string, max 255 characters.
     surname -- string, max 255 characters.
     password -- string, bcrypt, max 255 characters.
-    group -- string, max 10 charaters.
     archived -- boolean.
     blocked -- boolean.
     updated -- datetime.
@@ -42,7 +41,6 @@ class User(Base):
     givenname = Column(String(255))
     surname = Column(String(255))
     password = Column(String(255), nullable=False)
-    group = Column(String(10), nullable=False)
     archived = Column(Boolean, default=False)
     blocked = Column(Boolean, default=False)
     last_logged = Column(DateTime, default=datetime.utcnow)
@@ -51,11 +49,6 @@ class User(Base):
 
     """ Class constant used for accessing Bcrypt password manager. """
     pm = BCRYPTPasswordManager()
-
-    """ Some usergroups. This is supposed to be improved sometime
-    in the future.
-    """
-    groups = ['admin', 'editor', 'viewer']
 
     """ Method for returning a user based on id.
 
