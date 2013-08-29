@@ -2,17 +2,21 @@ import os
 import sys
 import transaction
 
+from getpass import getpass
 from sqlalchemy import engine_from_config
+from cryptacular.bcrypt import BCRYPTPasswordManager as BPM
+
 
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
     )
 
-from ..models import (
+from pulpy.models.meta import (
     DBSession,
     Base,
-    )
+)
+from pulpy.models import User
 
 
 def usage(argv):
@@ -31,4 +35,16 @@ def main(argv=sys.argv):
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
+
+    m = BPM()
+    a_email = raw_input('Enter email for admin account: ')
+    a_pw = getpass('Enter password for admin account: ')
+    a_hashed = m.encode(a_pw)
+
     with transaction.manager:
+        admin = User(
+                        email=a_email,
+                        password=a_hashed,
+                    )
+        DBSession.add(admin)
+

@@ -19,7 +19,7 @@ class MainViews(object):
     def __init__(self, request):
         self.request = request
 
-    @forbidden_view_config(renderer='pulpy:templates/error/notfound.mako')
+    @notfound_view_config(renderer='pulpy:templates/error/notfound.mako')
     def notfound(self):
         """ Not found view """
         return {'title': '404 - Page not found',
