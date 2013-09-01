@@ -29,6 +29,8 @@ Installation
   * create a virtualenv (eg: `virtualenv2 venv`). Use Python2.X
   * activate virtualenv `. venv/bin/activate`
   * clone this repo into venv directory (eg: venv/Pulpy)
+  * update the secret key twice in pulpy/__init__.py
+  * update the secret key in pulpy/forms/meta.py
   * run `pip install -e .` inside Pulpy directory
   * run `initialize_pulpy_db .ini`
   * run `pserve development.ini`
