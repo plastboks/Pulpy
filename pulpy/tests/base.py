@@ -18,7 +18,6 @@ from pulpy.models import (
 )
 
 
-
 class BaseTestCase(unittest.TestCase):
     """ Base class used for all unittests. This sets up the.
     database and so forth.

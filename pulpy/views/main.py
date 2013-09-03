@@ -14,6 +14,7 @@ from pyramid.view import (
     notfound_view_config,
 )
 
+
 class MainViews(object):
 
     def __init__(self, request):
