@@ -43,3 +43,25 @@ class UserModelTests(BaseTestCase):
         q = self._getTargetClass().by_id(1000)
         self.assertEqual(q.email, 'user3@email.com')
 
+
+class NoteModelTests(BaseTestCase):
+
+    def _getTargetClass(self):
+        from pulpy.models import Note
+        return Note
+
+    def _makeOne(self, id, title):
+        return self._getTargetClass()(id=id,
+                                      user_id=1,
+                                      title=title,
+                                      )
+
+    def test_constructor(self):
+        instance = self._makeOne(1, 'test')
+        self.assertEqual(instance.title, 'test')
+
+    def test_by_id(self):
+        instance = self._makeOne(1, 'test')
+        self.session.add(instance)
+        q = self._getTargetClass().by_id(1)
+        self.assertEqual(q.title, 'test')

@@ -11,6 +11,7 @@ from pulpy.tests import BaseTestCase
 
 from pulpy.views import (
     MainViews,
+    AuthViews,
 )
 
 
@@ -27,3 +28,10 @@ class BasicViewsTests(BaseTestCase):
         m = MainViews(request)
         response = m.forbidden()
         self.assertEqual(response['title'], '403 - Forbidden')
+
+    def test_login(self):
+        request = testing.DummyRequest()
+        request.POST = multidict.MultiDict()
+        a = AuthViews(request)
+        response = a.login()
+        self.assertEqual(response['title'], 'Login')
