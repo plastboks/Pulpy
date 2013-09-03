@@ -20,6 +20,11 @@ from pulpy.models import (
     Note,
 )
 
+from pulpy.forms import (
+    NoteCreateForm,
+    NoteEditForm,
+)
+
 
 class NoteViews(object):
 
@@ -37,3 +42,54 @@ class NoteViews(object):
         return {'paginator': notes,
                 'title': 'My notes',
                 }
+
+    @view_config(route_name='note_new',
+                 renderer='pulpy:templates/note/edit.mako',
+                 permission='create')
+    def note_create(self):
+        """ New note view. """
+
+        form = NoteCreateForm(self.request.POST,
+                                  csrf_context=self.request.session)
+
+        if self.request.method == 'POST' and form.validate():
+            n = Note()
+            form.populate_obj(n)
+            n.user_id = authenticated_userid(self.request)
+            DBSession.add(n)
+            self.request.session.flash('Note %s created' %
+                                       (n.title), 'success')
+            return HTTPFound(location=self.request.route_url('index'))
+        return {'title': 'New note',
+                'form': form,
+                'action': 'note_new'}
+
+    @view_config(route_name='note_edit',
+                 renderer='pulpy:templates/note/edit.mako',
+                 permission='edit')
+    def note_edit(self):
+        """ Edit note view. """
+
+        id = int(self.request.matchdict.get('id'))
+
+        n = Note.by_id(id)
+        if not n:
+            return HTTPNotFound()
+
+        """ Authorization check. """
+        if n.user_id is not authenticated_userid(self.request):
+            return HTTPForbidden()
+
+        form = NoteEditForm(self.request.POST, n,
+                                csrf_context=self.request.session)
+
+        if self.request.method == 'POST' and form.validate():
+            form.populate_obj(n)
+            self.request.session.flash('Note %s updated' %
+                                       (n.title), 'status')
+            return HTTPFound(location=self.request.route_url('index'))
+        return {'title': 'Edit note',
+                'form': form,
+                'id': id,
+                'note': n,
+                'action': 'note_edit'}
