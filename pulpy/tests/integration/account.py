@@ -19,7 +19,7 @@ class IntegrationAccountViews(IntegrationTestBase):
         token = res.form.fields['csrf_token'][0].value
         res = self.app.post('/login', {'submit': True,
                                        'csrf_token': token,
-                                       'email': 'user@email.com',
+                                       'email': 'user1@email.com',
                                        'password': '1234567'}
                             )
         res = self.app.get('/')
@@ -28,7 +28,7 @@ class IntegrationAccountViews(IntegrationTestBase):
         # get profile page
         res = self.app.get('/profile', status=200)
         self.assertIn('Profile edit', res.body)
-        self.assertIn('user@email.com', res.body)
+        self.assertIn('user1@email.com', res.body)
 
         # profile edit with password
         token = res.form.fields['csrf_token'][0].value
@@ -59,7 +59,7 @@ class IntegrationAccountViews(IntegrationTestBase):
 
         # profile edit wihout password
         token = res.form.fields['csrf_token'][0].value
-        res = self.app.post('/profile', {'email': 'user@email.com',
+        res = self.app.post('/profile', {'email': 'user1@email.com',
                                          'csrf_token': token,
                                          }
                             )
@@ -67,4 +67,4 @@ class IntegrationAccountViews(IntegrationTestBase):
         # get profile page
         res = self.app.get('/profile', status=200)
         self.assertIn('Profile edit', res.body)
-        self.assertIn('user@email.com', res.body)
+        self.assertIn('user1@email.com', res.body)

@@ -8,15 +8,23 @@ from pulpy.tests import BaseTestCase
 from pulpy.models import User
 
 
-def _initTestingDB(makeuser=False):
+def _initTestingDB(makeuser=False, maketwousers=False):
     engine = create_engine('sqlite://')
     Base.metadata.create_all(engine)
     DBSession.configure(bind=engine)
-    if makeuser:
+    if makeuser or maketwousers:
         m = BPM()
         hashed = m.encode(u'1234567')
         with transaction.manager:
-            user = User(email=u'user@email.com',
+            user = User(email=u'user1@email.com',
+                        password=hashed,
+                        )
+            DBSession.add(user)
+    if maketwousers:
+        m = BPM()
+        hashed = m.encode(u'1234567')
+        with transaction.manager:
+            user = User(email=u'user2@email.com',
                         password=hashed,
                         )
             DBSession.add(user)

@@ -41,6 +41,7 @@ def main(global_config, **settings):
 
     config.add_route('index', '/')
     config.add_route('note_new', '/note/new')
+    config.add_route('note_edit', '/note/edit/{id}')
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')

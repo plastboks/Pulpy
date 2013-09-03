@@ -26,7 +26,7 @@ class IntegrationAuthViews(IntegrationTestBase):
         token = res.form.fields['csrf_token'][0].value
         res = self.app.post('/login', {'submit': True,
                                        'csrf_token': token,
-                                       'email': 'user@email.com',
+                                       'email': 'user1@email.com',
                                        'password': '1234567'}
                             )
         self.assertTrue(res.status_int, 302)
