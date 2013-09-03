@@ -14,6 +14,14 @@
     ${form.title}
   </p>
 
+  %for error in form.body.errors:
+    <p class=error>${error}</p>
+  %endfor
+  <p>
+    ${form.body.label}<br />
+    ${form.body}
+  </p>
+
   %if action is 'note_edit':
     <p class='byline'>
       Created by: ${note.user.email} @ ${note.created.date()}

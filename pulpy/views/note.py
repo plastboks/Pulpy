@@ -18,6 +18,7 @@ from pyramid.view import (
 from pulpy.models.meta import DBSession
 from pulpy.models import (
     Note,
+    Noterevision,
 )
 
 from pulpy.forms import (
@@ -53,10 +54,18 @@ class NoteViews(object):
                                   csrf_context=self.request.session)
 
         if self.request.method == 'POST' and form.validate():
+            nr = Noterevision()
+            nr.body = form.body.data
+            del form.body
+
             n = Note()
             form.populate_obj(n)
             n.user_id = authenticated_userid(self.request)
             DBSession.add(n)
+            DBSession.flush()
+
+            nr.note_id = n.id
+            DBSession.add(nr)
             self.request.session.flash('Note %s created' %
                                        (n.title), 'success')
             return HTTPFound(location=self.request.route_url('index'))
@@ -84,10 +93,21 @@ class NoteViews(object):
                                 csrf_context=self.request.session)
 
         if self.request.method == 'POST' and form.validate():
+            nr = Noterevision()
+            nr.body = form.body.data
+            del form.body
+
             form.populate_obj(n)
+
+            nr.note_id = n.id
+            DBSession.add(nr)
+
             self.request.session.flash('Note %s updated' %
                                        (n.title), 'status')
             return HTTPFound(location=self.request.route_url('index'))
+
+        # get the last revision and insert into body
+        form.body.data = n.revisions[-1].body
         return {'title': 'Edit note',
                 'form': form,
                 'id': id,
