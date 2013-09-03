@@ -1,6 +1,7 @@
 from pulpy.models.meta import (
     DBSession,
     Base,
+    IPP,
 )
 
 from datetime import datetime
@@ -19,6 +20,9 @@ from sqlalchemy import (
 )
 
 from sqlalchemy.orm import relationship
+from pyramid.security import authenticated_userid
+from webhelpers.paginate import PageURL_WebOb, Page
+
 
 class Note(Base):
     """
@@ -49,3 +53,25 @@ class Note(Base):
     @classmethod
     def by_id(cls, id):
         return DBSession.query(Note).filter(Note.id == id).first()
+
+    """ Method for getting notes for user.
+
+    request -- request object.
+    """
+    @classmethod
+    def my(cls, request):
+        id = authenticated_userid(request)
+        return DBSession.query(Note).filter(Note.user_id == id)
+
+    """ Page method used for lists with pagination.
+
+    request -- request object.
+    page -- int, page int.
+    """
+    @classmethod
+    def page(cls, request, page):
+        page_url = PageURL_WebOb(request)
+        return Page(Note.my(request),
+                    page,
+                    url=page_url,
+                    items_per_page=IPP)
