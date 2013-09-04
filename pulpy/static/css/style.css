@@ -536,6 +536,15 @@ img {
 }
 
 /**
+ * Note edit spesific definitions
+ */
+#content form .revisions ul li {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+}
+
+/**
  * Footer
  */
 #footer {

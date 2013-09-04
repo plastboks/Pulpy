@@ -51,7 +51,7 @@ class NoteViews(object):
         """ New note view. """
 
         form = NoteCreateForm(self.request.POST,
-                                  csrf_context=self.request.session)
+                              csrf_context=self.request.session)
 
         if self.request.method == 'POST' and form.validate():
             nr = Noterevision()
@@ -76,6 +76,7 @@ class NoteViews(object):
             return HTTPFound(location=self.request.route_url('index'))
         return {'title': 'New note',
                 'form': form,
+                'revisions': False,
                 'action': 'note_new'}
 
     @view_config(route_name='note_edit',
@@ -85,6 +86,7 @@ class NoteViews(object):
         """ Edit note view. """
 
         id = int(self.request.matchdict.get('id'))
+        revision = self.request.params.get('revision')
 
         n = Note.by_id(id)
         if not n:
@@ -95,7 +97,7 @@ class NoteViews(object):
             return HTTPForbidden()
 
         form = NoteEditForm(self.request.POST, n,
-                                csrf_context=self.request.session)
+                            csrf_context=self.request.session)
 
         if self.request.method == 'POST' and form.validate():
             nr = Noterevision()
@@ -107,7 +109,7 @@ class NoteViews(object):
             nr.note_id = n.id
             DBSession.add(nr)
             DBSession.flush()
-            
+
             n.current_revision = nr.id
             DBSession.add(n)
 
@@ -118,9 +120,16 @@ class NoteViews(object):
         # Get the current revision and insert into form body.
         # This seems a bit retarted, and the current revision object
         # should maybe be a foreign object in the database.
-        form.body.data = Noterevision().by_id(n.current_revision).body
+        if (revision
+           and filter(lambda rev: rev.id == int(revision), n.revisions)):
+            form.body.data = Noterevision().by_id(int(revision)).body
+        else:
+            form.body.data = Noterevision().by_id(n.current_revision).body
+
         return {'title': 'Edit note',
                 'form': form,
                 'id': id,
                 'note': n,
+                # take away the last item in the list and flip it around.
+                'revisions': [(r) for r in reversed(n.revisions[:-1])],
                 'action': 'note_edit'}

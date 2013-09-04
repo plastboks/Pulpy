@@ -47,4 +47,3 @@ class Noterevision(Base):
     def by_id(cls, id):
         return DBSession.query(Noterevision)\
                         .filter(Noterevision.id == id).first()
-
