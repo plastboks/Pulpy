@@ -37,7 +37,7 @@ class Note(Base):
     __tablename__ = 'notes'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    #last_revision = Column(Integer, ForeignKey('noterevisions.id'))
+    current_revision = Column(Integer)
     title = Column(String(256))
     archived = Column(Boolean, default=False)
     created = Column(DateTime, default=datetime.utcnow)

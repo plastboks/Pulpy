@@ -22,6 +22,7 @@ class NoteCreateForm(BaseForm):
                       filters=[strip_filter])
     body = TextAreaField('Body')
 
+
 class NoteEditForm(NoteCreateForm):
     """
     Class constants representing form fields.

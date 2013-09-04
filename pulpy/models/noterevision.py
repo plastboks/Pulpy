@@ -38,3 +38,12 @@ class Noterevision(Base):
     archived = Column(Boolean, default=False)
     created = Column(DateTime, default=datetime.utcnow)
     updated = Column(DateTime, onupdate=datetime.utcnow)
+
+    """ Method for returning a user based on id.
+
+    id -- int, user id.
+    """
+    @classmethod
+    def by_id(cls, id):
+        return DBSession.query(Noterevision)\
+                        .filter(Noterevision.id == id).first()

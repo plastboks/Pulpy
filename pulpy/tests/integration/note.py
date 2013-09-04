@@ -33,6 +33,7 @@ class IntegrationNoteViews(IntegrationTestBase):
         self.assertTrue('New note', res.body)
         token = res.form.fields['csrf_token'][0].value
         res = self.app.post('/note/new', {'title': 'testnote',
+                                          'body': 'hello world',
                                           'csrf_token': token}
                             )
 
@@ -40,15 +41,24 @@ class IntegrationNoteViews(IntegrationTestBase):
         res = self.app.get('/')
         self.assertTrue('testnote', res.body)
 
-        # edit the note
+        # edit the note and create a new revision
         res = self.app.get('/note/edit/1')
         self.assertTrue('testnote', res.body)
         token = res.form.fields['csrf_token'][0].value
         res = self.app.post('/note/edit/1', {'title': 'notetest',
                                              'id': 1,
+                                             'body': 'bye cruel world',
                                              'csrf_token': token}
                             )
-        
+        # view the first revision
+        res = self.app.get('/note/edit/1?revision=1')
+
+        # try to view a none existing revision or someone elses
+        res = self.app.get('/note/edit/1?revision=100')
+        self.assertTrue('bye cruel world',
+                        res.form.fields['body'][0].value
+                        )
+
         # try to edit none existing note
         res = self.app.get('/note/edit/100', status=404)
 

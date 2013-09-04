@@ -22,6 +22,17 @@
     ${form.body}
   </p>
 
+  %if revisions:
+    <div class='revisions'>
+    <p>Older revisions</p>
+    <ul>
+      %for r in revisions:
+        <li><a href="${request.route_url(action, id=id, _query={'revision': r.id})}">${r.created}</a></li>
+      %endfor
+    </ul>
+    </div>
+  %endif
+
   %if action is 'note_edit':
     <p class='byline'>
       Created by: ${note.user.email} @ ${note.created.date()}
