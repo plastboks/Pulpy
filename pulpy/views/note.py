@@ -66,6 +66,11 @@ class NoteViews(object):
 
             nr.note_id = n.id
             DBSession.add(nr)
+            DBSession.flush()
+
+            n.current_revision = nr.id
+            DBSession.add(n)
+
             self.request.session.flash('Note %s created' %
                                        (n.title), 'success')
             return HTTPFound(location=self.request.route_url('index'))
@@ -101,13 +106,19 @@ class NoteViews(object):
 
             nr.note_id = n.id
             DBSession.add(nr)
+            DBSession.flush()
+            
+            n.current_revision = nr.id
+            DBSession.add(n)
 
             self.request.session.flash('Note %s updated' %
                                        (n.title), 'status')
             return HTTPFound(location=self.request.route_url('index'))
 
-        # get the last revision and insert into body
-        form.body.data = n.revisions[-1].body
+        # Get the current revision and insert into form body.
+        # This seems a bit retarted, and the current revision object
+        # should maybe be a foreign object in the database.
+        form.body.data = Noterevision().by_id(n.current_revision).body
         return {'title': 'Edit note',
                 'form': form,
                 'id': id,
