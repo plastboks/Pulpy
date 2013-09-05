@@ -540,6 +540,17 @@ img {
  */
 #content form .revisions ul li {
     display: block;
+    padding: 1px;
+    margin: 0px;
+}
+
+#content form .revisions ul li.current {
+    font-weight: bold;
+}
+
+#content form .notice {
+    color: salmon;
+    font-style: italic;
     padding: 0px;
     margin: 0px;
 }

@@ -18,16 +18,21 @@
     <p class=error>${error}</p>
   %endfor
   <p>
-    ${form.body.label}<br />
+    ${form.body.label}
     ${form.body}
+    %if revision:
+      <span class="notice">${"You are viewing an older revision than the current" if int(revision) != note.current_revision else ""}</span>
+    %endif
   </p>
 
-  %if revisions:
+  %if revisions and revision:
     <div class='revisions'>
-    <p>Older revisions</p>
+    <p>Revisions</p>
     <ul>
       %for r in revisions:
-        <li><a href="${request.route_url(action, id=id, _query={'revision': r.id})}">${r.created}</a></li>
+        <li class="${'current' if int(revision) == int(r.id) else 'archived'}" >
+          <a href="${request.route_url(action, id=id, _query={'revision': r.id})}">${r.created.strftime('%Y-%m-%d - %M:%S')}</a>
+        </li>
       %endfor
     </ul>
     </div>

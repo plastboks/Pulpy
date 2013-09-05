@@ -123,13 +123,15 @@ class NoteViews(object):
         if (revision
            and filter(lambda rev: rev.id == int(revision), n.revisions)):
             form.body.data = Noterevision().by_id(int(revision)).body
+            displayed_revision = revision
         else:
             form.body.data = Noterevision().by_id(n.current_revision).body
+            displayed_revision = n.current_revision
 
         return {'title': 'Edit note',
                 'form': form,
                 'id': id,
                 'note': n,
-                # take away the last item in the list and flip it around.
-                'revisions': [(r) for r in reversed(n.revisions[:-1])],
+                'revisions': [(r) for r in reversed(n.revisions)],
+                'revision': displayed_revision,
                 'action': 'note_edit'}
