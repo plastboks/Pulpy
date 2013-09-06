@@ -1,6 +1,7 @@
 from datetime import datetime
 from pyramid.response import Response
 from sqlalchemy.exc import DBAPIError
+from markdown import Markdown
 
 from pyramid.httpexceptions import (
     HTTPNotFound,
@@ -95,9 +96,13 @@ class NoteViews(object):
         if n.user_id is not authenticated_userid(self.request):
             return HTTPForbidden()
 
+        md = Markdown(output_format='html5')
+        cur_revision = Noterevision().by_id(n.current_revision)
+
         return {'note': n,
                 'title': 'Note - '+n.title,
-                'current_revision': Noterevision().by_id(n.current_revision),
+                'current_revision': cur_revision,
+                'body': md.convert(cur_revision.body),
                 }
 
     @view_config(route_name='note_edit',

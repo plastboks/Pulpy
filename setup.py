@@ -22,6 +22,8 @@ requires = [
     'coverage',
     'pep8',
     'webhelpers',
+    'latex2markdown',
+    'markdown',
     ]
 
 setup(name='pulpy',
