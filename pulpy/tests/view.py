@@ -39,7 +39,7 @@ class BasicViewsTests(BaseTestCase):
 
 
 class NoteViewsTest(BaseTestCase):
-    
+
     def test_notes_list(self):
         request = testing.DummyRequest()
         n = NoteViews(request)

@@ -40,7 +40,7 @@ class IntegrationNoteViews(IntegrationTestBase):
         # check for note in list
         res = self.app.get('/')
         self.assertTrue('testnote', res.body)
-        
+
         # view the note
         res = self.app.get('/note/view/1')
         self.assertIn('hello world', res.body)

@@ -100,7 +100,6 @@ class NoteViews(object):
                 'current_revision': Noterevision().by_id(n.current_revision),
                 }
 
-
     @view_config(route_name='note_edit',
                  renderer='pulpy:templates/note/edit.mako',
                  permission='edit')
