@@ -40,6 +40,10 @@ class IntegrationNoteViews(IntegrationTestBase):
         # check for note in list
         res = self.app.get('/')
         self.assertTrue('testnote', res.body)
+        
+        # view the note
+        res = self.app.get('/note/view/1')
+        self.assertIn('hello world', res.body)
 
         # edit the note and create a new revision
         res = self.app.get('/note/edit/1')
@@ -61,6 +65,8 @@ class IntegrationNoteViews(IntegrationTestBase):
 
         # try to edit none existing note
         res = self.app.get('/note/edit/100', status=404)
+        # try to view a none existing note
+        res = self.app.get('/note/view/100', status=404)
 
         # logout
         self.app.get('/logout')
@@ -78,4 +84,7 @@ class IntegrationNoteViews(IntegrationTestBase):
         self.assertTrue('My notes', res.body)
         self.assertTrue('No notes found', res.body)
 
+        # try to edit a note the user do not have permission to edit
         self.app.get('/note/edit/1', status=403)
+        # try to view a note the user do not have permission to view
+        self.app.get('/note/view/1', status=403)
