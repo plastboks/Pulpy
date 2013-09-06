@@ -79,6 +79,28 @@ class NoteViews(object):
                 'revisions': False,
                 'action': 'note_new'}
 
+    @view_config(route_name='note_view',
+                 renderer='pulpy:templates/note/view.mako',
+                 permission='view')
+    def note_view(self):
+        """ Note view. """
+
+        id = int(self.request.matchdict.get('id'))
+
+        n = Note.by_id(id)
+        if not n:
+            return HTTPNotFound()
+
+        """ Authorization check. """
+        if n.user_id is not authenticated_userid(self.request):
+            return HTTPForbidden()
+
+        return {'note': n,
+                'title': 'Note - '+n.title,
+                'current_revision': Noterevision().by_id(n.current_revision),
+                }
+
+
     @view_config(route_name='note_edit',
                  renderer='pulpy:templates/note/edit.mako',
                  permission='edit')
