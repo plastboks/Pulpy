@@ -2,6 +2,7 @@ from datetime import datetime
 from pyramid.response import Response
 from sqlalchemy.exc import DBAPIError
 from markdown import Markdown
+from hashlib import sha1
 
 from pyramid.httpexceptions import (
     HTTPNotFound,
@@ -124,19 +125,24 @@ class NoteViews(object):
 
         form = NoteEditForm(self.request.POST, n,
                             csrf_context=self.request.session)
+        cur_revision = Noterevision().by_id(n.current_revision)
 
         if self.request.method == 'POST' and form.validate():
-            nr = Noterevision()
-            nr.body = form.body.data
+            # generate a sha1 hash from both the new and old
+            # revision body, then compare them. Only if these
+            # hashes do not compare, create a new revision.
+            sha1_cur = sha1(cur_revision.body).hexdigest()
+            sha1_new = sha1(form.body.data).hexdigest()
+            if sha1_cur != sha1_new:
+                nr = Noterevision()
+                nr.body = form.body.data
+                nr.note_id = n.id
+                DBSession.add(nr)
+                DBSession.flush()
+                n.current_revision = nr.id
             del form.body
 
             form.populate_obj(n)
-
-            nr.note_id = n.id
-            DBSession.add(nr)
-            DBSession.flush()
-
-            n.current_revision = nr.id
             DBSession.add(n)
 
             self.request.session.flash('Note %s updated' %
@@ -151,8 +157,8 @@ class NoteViews(object):
             form.body.data = Noterevision().by_id(int(revision)).body
             displayed_revision = revision
         else:
-            form.body.data = Noterevision().by_id(n.current_revision).body
-            displayed_revision = n.current_revision
+            form.body.data = cur_revision.body
+            displayed_revision = cur_revision.id
 
         return {'title': 'Edit note',
                 'form': form,
