@@ -102,7 +102,6 @@ class NoteViews(object):
 
         return {'note': n,
                 'title': 'Note - '+n.title,
-                'current_revision': cur_revision,
                 'body': md.convert(cur_revision.body),
                 }
 

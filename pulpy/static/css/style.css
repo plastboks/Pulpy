@@ -190,7 +190,7 @@ img {
 #content {
   width: 810px;
   float: left;
-  min-height: 200px;
+  min-height: 50px;
   background: none repeat scroll 0 0 #F7F7F7;
   border: 1px solid lightgray;
   margin-left: 10px;
@@ -310,8 +310,9 @@ img {
   padding: 2px;
 }
 
-#content form p.byline {
-  font-size: 0.9em;
+#content p.byline {
+  font-size: 0.75em;
+  padding-top: 20px;
 }
 
 #content span {
