@@ -11,6 +11,14 @@
     ${form.email}
   </p>
 
+  %for error in form.datetime_format.errors:
+    <p class=error>${error}</p>
+  %endfor
+  <p>
+    ${form.datetime_format.label}<br />
+    ${form.datetime_format}
+  </p>
+
   %for error in form.password.errors:
     <p class=error>${error}</p>
   %endfor

@@ -41,6 +41,7 @@ class User(Base):
     givenname = Column(String(255))
     surname = Column(String(255))
     password = Column(String(255), nullable=False)
+    datetime_format = Column(String(255), default='%Y-%m-%d - %M:%S')
     archived = Column(Boolean, default=False)
     blocked = Column(Boolean, default=False)
     last_logged = Column(DateTime, default=datetime.utcnow)
@@ -49,6 +50,12 @@ class User(Base):
 
     """ Class constant used for accessing Bcrypt password manager. """
     pm = BCRYPTPasswordManager()
+
+    """ Available datetime formats'"""
+    dt_formats = ['%Y-%m-%d - %M:%S',
+                  '%m/%d/%Y - %M:%S',
+                  ]
+    
 
     """ Method for returning a user based on id.
 
