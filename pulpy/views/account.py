@@ -50,6 +50,7 @@ class AccountViews(object):
                 u.password = u.pm.encode(form.password.data)
             else:
                 del u.password
+            self.request.session.update({'dateformat': u.datetime_format})
             self.request.session.flash('User %s updated' %
                                        (u.email), 'status')
             return HTTPFound(location=self.request.route_url('profile'))
