@@ -33,9 +33,9 @@
   </p>
 
   <p class='byline'>
-    Created @: ${user.created.date()}
+    Created @: ${user.created.strftime(request.session.get('dateformat'))}
     %if user.updated:
-      | updated @ ${user.updated.date()}
+      | updated @ ${user.updated.strftime(request.session.get('dateformat'))}
     %endif
   </p>
 

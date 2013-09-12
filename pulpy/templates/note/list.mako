@@ -13,7 +13,7 @@
         %for item in paginator.items:
           <tr>
             <td><a href="${request.route_url('note_view', id=item.id)}">${item.title}</a></td>
-            <td>${item.created.strftime('%Y-%m-%d %M:%S')}</td>
+            <td>${item.created.strftime(request.session.get('dateformat'))}</td>
             <td>${len(item.revisions)}</td>
             <td class='actions'>
               <a href="${request.route_url('note_edit', id=item.id)}">
