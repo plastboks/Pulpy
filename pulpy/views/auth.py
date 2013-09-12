@@ -43,7 +43,8 @@ class AuthViews(object):
                and user.archived is not True):
 
                 headers = remember(self.request, user.id)
-
+                self.request.session.update({'dateformat':
+                                             user.datetime_format})
                 self.request.session.flash('Welcome back %s' %
                                            (user.email), 'success')
                 return HTTPFound(location=self.request.route_url('index'),
