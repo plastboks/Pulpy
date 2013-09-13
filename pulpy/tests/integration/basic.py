@@ -16,3 +16,6 @@ class IntegrationBasicViews(IntegrationTestBase):
     def test_404_page(self):
         res = self.app.get('/3orej23riojwefiljw', status=200)
         self.assertIn('404 - Page not found', res.body)
+
+    def test_403_page(self):
+        res = self.app.get('/note/edit/1', status=302)

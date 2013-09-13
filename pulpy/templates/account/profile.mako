@@ -11,6 +11,14 @@
     ${form.email}
   </p>
 
+  %for error in form.datetime_format.errors:
+    <p class=error>${error}</p>
+  %endfor
+  <p>
+    ${form.datetime_format.label}<br />
+    ${form.datetime_format}
+  </p>
+
   %for error in form.password.errors:
     <p class=error>${error}</p>
   %endfor
@@ -25,9 +33,9 @@
   </p>
 
   <p class='byline'>
-    Created @: ${user.created.date()}
+    Created @: ${user.created.strftime(request.session.get('dateformat'))}
     %if user.updated:
-      | updated @ ${user.updated.date()}
+      | updated @ ${user.updated.strftime(request.session.get('dateformat'))}
     %endif
   </p>
 

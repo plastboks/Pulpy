@@ -21,7 +21,7 @@
     ${form.body.label}
     ${form.body}
     %if revision:
-      <span class="notice">${"You are viewing an older revision than the current" if int(revision) != note.current_revision else ""}</span>
+      <span class="notice">${"You are viewing an older revision than the current" if int(revision) != note.revisions[-1].id else ""}</span>
     %endif
   </p>
 
@@ -31,7 +31,7 @@
     <ul>
       %for r in revisions:
         <li class="${'current' if int(revision) == int(r.id) else 'archived'}" >
-          <a href="${request.route_url(action, id=id, _query={'revision': r.id})}">${r.created.strftime('%Y-%m-%d - %M:%S')}</a>
+          <a href="${request.route_url(action, id=id, _query={'revision': r.id})}">${r.created.strftime(request.session.get('dateformat'))}</a>
         </li>
       %endfor
     </ul>
@@ -40,9 +40,9 @@
 
   %if action is 'note_edit':
     <p class='byline'>
-      Created by: ${note.user.email} @ ${note.created.date()}
+      Created by: ${note.user.email} @ ${note.created.strftime(request.session.get('dateformat'))}
       %if note.updated:
-        | updated @ ${note.updated.date()}
+        | updated @ ${note.updated.strftime(request.session.get('dateformat'))}
       %endif
     </p>
   %endif

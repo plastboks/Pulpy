@@ -33,5 +33,8 @@ class AccountEditForm(BaseForm):
                                                  message='Passwords\
                                                           must match')],
                              filters=[strip_filter])
+    datetime_format = SelectField('Datetime format',
+                                  choices=[(n[0], n[1])
+                                           for n in User.dt_formats])
     confirm = PasswordField('Confirm password',
                             filters=[strip_filter])
