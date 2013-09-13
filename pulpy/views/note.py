@@ -28,6 +28,8 @@ from pulpy.forms import (
     NoteEditForm,
 )
 
+import transaction
+
 
 class NoteViews(object):
 
@@ -68,10 +70,6 @@ class NoteViews(object):
 
             nr.note_id = n.id
             DBSession.add(nr)
-            DBSession.flush()
-
-            n.current_revision = nr.id
-            DBSession.add(n)
 
             self.request.session.flash('Note %s created' %
                                        (n.title), 'success')
@@ -98,7 +96,7 @@ class NoteViews(object):
             return HTTPForbidden()
 
         md = Markdown(output_format='html5')
-        cur_revision = Noterevision().by_id(n.current_revision)
+        cur_revision = n.revisions[-1]
 
         return {'note': n,
                 'title': 'Note - '+n.title,
@@ -124,7 +122,7 @@ class NoteViews(object):
 
         form = NoteEditForm(self.request.POST, n,
                             csrf_context=self.request.session)
-        cur_revision = Noterevision().by_id(n.current_revision)
+        cur_revision = n.revisions[-1]
 
         if self.request.method == 'POST' and form.validate():
             # generate a sha1 hash from both the new and old

@@ -17,7 +17,7 @@ from sqlalchemy import (
     or_,
     and_,
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 
 class Noterevision(Base):
@@ -37,7 +37,10 @@ class Noterevision(Base):
     body = Column(String(4096))
     archived = Column(Boolean, default=False)
     created = Column(DateTime, default=datetime.utcnow)
-    updated = Column(DateTime, onupdate=datetime.utcnow)
+
+    note = relationship('Note',
+                        backref=backref('revisions'),
+                        order_by=created)
 
     """ Method for returning a user based on id.
 

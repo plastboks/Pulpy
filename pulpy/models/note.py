@@ -44,7 +44,6 @@ class Note(Base):
     updated = Column(DateTime, onupdate=datetime.utcnow)
 
     user = relationship('User', backref='notes')
-    revisions = relationship('Noterevision', backref='note')
 
     """ Method for returning a user based on id.
 
