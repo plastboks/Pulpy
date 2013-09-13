@@ -21,7 +21,7 @@
     ${form.body.label}
     ${form.body}
     %if revision:
-      <span class="notice">${"You are viewing an older revision than the current" if int(revision) != note.current_revision else ""}</span>
+      <span class="notice">${"You are viewing an older revision than the current" if int(revision) != note.revisions[-1].id else ""}</span>
     %endif
   </p>
 

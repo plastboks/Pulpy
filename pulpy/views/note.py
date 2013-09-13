@@ -136,7 +136,6 @@ class NoteViews(object):
                 nr.note_id = n.id
                 DBSession.add(nr)
                 DBSession.flush()
-                n.current_revision = nr.id
             del form.body
 
             form.populate_obj(n)
