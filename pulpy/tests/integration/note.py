@@ -85,6 +85,8 @@ class IntegrationNoteViews(IntegrationTestBase):
         self.assertTrue('No notes found', res.body)
 
         # try to edit a note the user do not have permission to edit
-        self.app.get('/note/edit/1', status=403)
+        res = self.app.get('/note/edit/1', status=403)
+        self.assertIn('403 Forbidden', res.body)
         # try to view a note the user do not have permission to view
-        self.app.get('/note/view/1', status=403)
+        res = self.app.get('/note/view/1', status=403)
+        self.assertIn('403 Forbidden', res.body)

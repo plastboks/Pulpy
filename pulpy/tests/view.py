@@ -24,12 +24,6 @@ class BasicViewsTests(BaseTestCase):
         response = m.notfound()
         self.assertEqual(response['title'], '404 - Page not found')
 
-    def test_forbidden(self):
-        request = testing.DummyRequest()
-        m = MainViews(request)
-        response = m.forbidden()
-        self.assertEqual(response['title'], '403 - Forbidden')
-
     def test_login(self):
         request = testing.DummyRequest()
         request.POST = multidict.MultiDict()

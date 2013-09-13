@@ -28,10 +28,7 @@ class MainViews(object):
                            self.request.path
                 }
 
-    @forbidden_view_config(renderer='pulpy:templates/error/notfound.mako')
+    @forbidden_view_config(renderer='string')
     def forbidden(self):
         """ Forbidden view """
-        return {'title': '403 - Forbidden',
-                'message': '"%s" is not the page you are looking for' %
-                           self.request.path
-                }
+        return HTTPFound(self.request.route_url('login'))
