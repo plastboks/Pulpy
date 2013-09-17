@@ -5,6 +5,7 @@
   <link rel="shortcut icon" href="${request.static_url('pulpy:static/favicon.ico')}" />
   <link rel="stylesheet" href="${request.static_url('pulpy:static/css/normalize.css')}" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="${request.static_url('pulpy:static/css/style.css')}" type="text/css" media="screen" charset="utf-8" />
+  <script data-main="${request.static_url('pulpy:static/js/main')}" src="${request.static_url('pulpy:static/js/require-2.1.8.min.js')}"></script>
 </head>
 <body>
   <div id="wrapper">
