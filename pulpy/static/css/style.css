@@ -569,3 +569,15 @@ img {
   text-align: center;
   margin-left: 130px;
 }
+
+/**
+ * Ace editor
+ */
+#aceeditor {
+  height: 300px;
+  width: 97%;
+  margin-bottom: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 2px;
+}
