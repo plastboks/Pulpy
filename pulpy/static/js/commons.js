@@ -11,4 +11,8 @@
 
 jQuery(function($){
 
+  $(document).on('click', '.thisclose', function(){
+      $(this).parent('p').remove();
+  });
+
 });
