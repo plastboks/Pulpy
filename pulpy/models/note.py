@@ -57,9 +57,16 @@ class Note(Base):
     request -- request object.
     """
     @classmethod
-    def my(cls, request):
+    def my(cls, request, archived=False):
         id = authenticated_userid(request)
-        return DBSession.query(Note).filter(Note.user_id == id)
+        base = DBSession.query(Note)
+        #if archived:
+        #    base = base.filter(and_(Note.user_id == id,
+        #                            Note.archived == True))
+        #else:
+        base = base.filter(and_(Note.user_id == id,
+                                Note.archived == False))
+        return base
 
     """ Page method used for lists with pagination.
 
