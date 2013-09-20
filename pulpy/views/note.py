@@ -71,9 +71,10 @@ class NoteViews(object):
             nr.note_id = n.id
             DBSession.add(nr)
 
-            self.request.session.flash('Note %s created' %
+            self.request.session.flash('Note "%s" created' %
                                        (n.title), 'success')
-            return HTTPFound(location=self.request.route_url('index'))
+            return HTTPFound(location=self.request.route_url('note_view',
+                                                             id=n.id))
         return {'title': 'New note',
                 'form': form,
                 'revisions': False,
@@ -99,7 +100,7 @@ class NoteViews(object):
         cur_revision = n.revisions[-1]
 
         return {'note': n,
-                'title': 'Note - '+n.title,
+                'title': n.title,
                 'body': md.convert(cur_revision.body),
                 }
 
@@ -141,9 +142,10 @@ class NoteViews(object):
             form.populate_obj(n)
             DBSession.add(n)
 
-            self.request.session.flash('Note %s updated' %
+            self.request.session.flash('Note "%s" updated' %
                                        (n.title), 'status')
-            return HTTPFound(location=self.request.route_url('index'))
+            return HTTPFound(location=self.request.route_url('note_view',
+                                                             id=n.id))
 
         # Get the current revision and insert into form body.
         # This seems a bit retarted, and the current revision object
