@@ -2,16 +2,16 @@ Pulpy
 =====
 
 ## Pulpy - The Name
-The name originates from a little browsing on the interwebs for synonyms of the word "remember". A hit got to me to a synonym word site where synonyms for remember was listed. From there the route was Remember -> Mnemonic -> Nostalgic -> Mushy -> Pulpy. It might seem like a stretch, but I find the name both suiting and a bit abstract at the same time (and as a added bonus, it ends with py). So to conclude; the name is a bit abstract, but I like it.
+The name originates from a little browsing on the interwebs for synonyms of the word "remember". A hit got me to a synonym word site where synonyms for "remember" was listed. From there the route was Remember -> Mnemonic -> Nostalgic -> Mushy -> Pulpy. It might seem like a stretch, but I find the name both suiting and a bit abstract at the same time (and as a added bonus, it ends with py). So to conclude; the name is a bit abstract and I like it.
 
 ## Pulpy - The Purpose
-So what is the purpose of yet another webapp for storing information. Well but it simple, I like making webapps and I see a need for this. Document storing and transporting around has never been my strongest (or for that matter, preferred) side. This webapp is supposed to close that gap in a clean and easy way. Think of it as notes being accessible anywhere anytime (not very original...).
+So what is the purpose of yet another webapp for storing information. Well put it simple, I like making webapps and I see a need for this. Document storing and transporting around has never been my strongest (or for that matter, preferred) side. This webapp is supposed to close that gap in a clean and easy way. Think of it as notes being accessible anywhere anytime (not very original...).
 
 ## Pulpy - Now and The Future
 Pulpy webapp is going to be one of my long term projects, written without a final goal (seems familiar?). The reason for this is my changing needs. What seems like a good idea today, might not be needed of interest in a year, or six months. Pulpy 1.0 will only be a simple (non shared between users) app for storing private notes. Maybe in some future version, the ability for sharing notes between users will be added... who knows.
 
 ## Pulpy - The Features
-Simple bulletlist follows:
+Simple bullet list follows:
 * View, Create, Edit and Delete Notes.
 * Syntaxhightlighting for both programming languages and LaTex code. 
 * Markdown or simple wysiwyg editor.
@@ -43,7 +43,7 @@ This app will be written with TDD. To test the app run:
 Branches
 ========
 There will mainly be two branches in this repo (@github) at all times. The master and develop branch.
-The master branch will be kept back featurewise of the develop branch. This is to ensure the stability of the master branch
+The master branch will be kept back feature wise of the develop branch. This is to ensure the stability of the master branch
 
 License
 =======
