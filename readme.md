@@ -37,13 +37,11 @@ Installation
   * run `initialize_pulpy_db .ini`
   * run `pserve development.ini`
 
-Deploy
-======
-  * make a copy of examples/uwsgi.ini.example and edit accordingly.
-  * install uwsgi `pip install uwsgi` (globally?)
-  * copy examples/pulpy.nginx.example to your nginx sites folder and enable
-  * run `uwsgi uwsgi.ini`
-  * restart nginx
+Deploy with nginx
+=================
+  * Copy pulpy.nginx.example from the example folder over to your nginx install.
+  * start pserve `pserver production.ini`.
+  * See credits section for complete tutorial.
 
 Testing
 =======
@@ -66,3 +64,4 @@ Credits
   * [WTForms](http://wtforms.simplecodes.com/docs/1.0.4/)
   * [SQLAlchemy](http://www.sqlalchemy.org/)
   * [Open icons](http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/knotes.png)
+  * [Nginx + pserver](http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/deployment/nginx.html)
