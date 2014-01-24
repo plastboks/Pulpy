@@ -8,6 +8,7 @@ CHANGES = open(os.path.join(here, 'changes.md')).read()
 
 requires = [
     'pyramid',
+    'pyramid_mako',
     'SQLAlchemy',
     'transaction',
     'pyramid_tm',
