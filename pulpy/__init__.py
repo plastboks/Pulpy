@@ -37,6 +37,8 @@ def main(global_config, **settings):
                           root_factory='pulpy.security.EntryFactory',
                           session_factory=sess_factory,)
 
+    config.include('pyramid_mako')
+
     config.add_static_view('static', 'static', cache_max_age=3600)
 
     config.add_route('index', '/')
