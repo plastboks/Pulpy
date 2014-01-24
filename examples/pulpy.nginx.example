@@ -32,14 +32,15 @@ server {
         proxy_read_timeout      90s;
         proxy_buffering         off;
         proxy_temp_file_write_size 64k;
-        proxy_pass http://myapp-site;
+        proxy_pass http://pulpy-site;
         proxy_redirect          off;
+    }
+
+    location /static {
+	root                    /home/example/myapp/myapp;
+	expires                 30d;
+	add_header              Cache-Control public;
+	access_log              off;
     }
 }
 
-location /static {
-    root                    /home/example/myapp/myapp;
-    expires                 30d;
-    add_header              Cache-Control public;
-    access_log              off;
-}
