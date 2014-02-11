@@ -1,7 +1,6 @@
 # pulpy.conf
 
 upstream pulpy-site {
-    server 127.0.0.1:5000;
     server 127.0.0.1:5001;
 }
 

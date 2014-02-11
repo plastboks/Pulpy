@@ -40,7 +40,7 @@ Installation
 Deploy with nginx
 =================
   * Copy pulpy.nginx.example from the example folder over to your nginx install.
-  * start pserve `pserver production.ini`.
+  * start pserve `../bin/gunicorn --paste production.ini`.
   * See credits section for complete tutorial.
 
 Testing

@@ -25,6 +25,7 @@ requires = [
     'webhelpers',
     'latex2markdown',
     'markdown',
+    'gunicorn'
     ]
 
 setup(name='pulpy',
