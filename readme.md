@@ -1,7 +1,7 @@
 Pulpy
 =====
 ## Pulpy - The Name
-The name originates from a little browsing on the interwebs for synonyms of the word "remember". A hit got me to a synonym word site where synonyms for "remember" was listed. From there the route was Remember -> Mnemonic -> Nostalgic -> Mushy -> Pulpy. It might seem like a stretch, but I find the name both suiting and a bit abstract at the same time (and as a added bonus, it ends with py). So to conclude; the name is a bit abstract and I like it.
+The name originates from a little browsing on the Internet for synonyms of the word "remember". A hit got me to a synonym word site where synonyms for "remember" was listed. From there the route was Remember -> Mnemonic -> Nostalgic -> Mushy -> Pulpy. It might seem like a stretch, but I find the name both suiting and a bit abstract at the same time (and as a added bonus, it ends with py). So to conclude; the name is a bit abstract and I like it.
 
 Pulpy - The Purpose
 ===================
@@ -15,7 +15,7 @@ Pulpy - The Features
 =======================
 Simple bullet list follows:
 * View, Create, Edit and Delete Notes.
-* Syntaxhightlighting for both programming languages and LaTex code. 
+* Syntax highlighting for both programming languages and LaTex code. 
 * Markdown or simple wysiwyg editor.
 * Tag notes for grouping and categorizing.
 * Revise notes for changes and history.
@@ -28,9 +28,9 @@ This application is based on the [Pyramid Python Webframework](http://www.pylons
 
 Installation
 ============
-  * create a virtualenv (eg: `virtualenv2 venv`). Use Python2.X
-  * activate virtualenv `. venv/bin/activate`
-  * clone this repo into venv directory (eg: venv/Pulpy)
+  * create a virtualenv (eg: `virtualenv2 pulpy`). Use Python2.x
+  * activate virtualenv `. pulpy/bin/activate`
+  * clone this github repository into virtualenv directory (eg: pulpy/app)
   * update the secret key twice in pulpy/__init__.py
   * update the secret key in pulpy/forms/meta.py
   * run `pip install -e .` inside Pulpy directory
@@ -50,7 +50,7 @@ This app will be written with TDD. To test the app run:
 
 Branches
 ========
-There will mainly be two branches in this repo (@github) at all times. The master and develop branch.
+There will mainly be two branches in this repository (@github) at all times. The master and develop branch.
 The master branch will be kept back feature wise of the develop branch. This is to ensure the stability of the master branch
 
 License
