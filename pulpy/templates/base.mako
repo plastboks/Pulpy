@@ -8,22 +8,22 @@
   <script data-main="${request.static_url('pulpy:static/js/main')}" src="${request.static_url('pulpy:static/js/require-2.1.8.min.js')}"></script>
 </head>
 <body>
-  <div id="wrapper">
-    <div id="header">
-       <h1>${request.registry.settings.get('pulpy.title')}</h1>
-    </div>
-    <div id="messages">
-      <%include file="pulpy:templates/messages.mako"/>
-    </div>
-    <div class="sidebar corners5px">
-      <%include file="pulpy:templates/sidebar.mako"/>
-    </div>
-    <div id="content" class="corners5px">
-       ${next.body()} 
-    </div>
-    <div id='footer'>
-      <p>${request.registry.settings.get('pulpy.footer')}</p>
-    </div>
-  </div>
+    <section id="wrapper">
+        <header>
+            <h1>${request.registry.settings.get('pulpy.title')}</h1>
+        </header>
+        <section id="messages">
+            <%include file="pulpy:templates/messages.mako"/>
+        </section>
+        <nav class="sidebar corners5px">
+            <%include file="pulpy:templates/sidebar.mako"/>
+        </nav>
+        <section id="content" class="corners5px">
+            ${next.body()} 
+        </section>
+        <footer>
+            <p>${request.registry.settings.get('pulpy.footer')}</p>
+        </footer>
+    </section>
 </body>
 </html>

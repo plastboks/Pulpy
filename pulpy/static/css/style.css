@@ -30,13 +30,13 @@ img {
 /**
  * header 
  */
-#header {
+header {
   width: 1020px;
   margin: 0 auto;
   padding-left: 0px;
 }
 
-#header h1 {
+header h1 {
   font-weight: 300;
   font-size: 3em;
   background: url('../icons/pulpy-64.png') no-repeat;
@@ -609,12 +609,12 @@ img {
 /**
  * Footer
  */
-#footer {
+footer {
   clear: both;
   padding-top: 15px;
 }
 
-#footer p {
+footer p {
   font-size: 0.8em;
   text-align: center;
   margin-left: 130px;

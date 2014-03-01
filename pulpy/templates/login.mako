@@ -7,26 +7,26 @@
   <link rel="stylesheet" href="${request.static_url('pulpy:static/css/login.css')}" type="text/css" media="screen" charset="utf-8" />
 </head>
 <body>
-  <section id="login">
-    <h1>${request.registry.settings.get('pulpy.title')}</h1>
-    <form action="${request.route_url('login')}" method="post">
-      ${form.csrf_token}
-      %for m in request.session.pop_flash('error'):
-        <p class='error'>${m}<p>
-      %endfor
-      %for error in form.email.errors:
-        <p class='error'>${error}</p>
-      %endfor
-      <p>
-        ${form.email.label}<br />
-        ${form.email}
-      </p>
-      <p>
-        ${form.password.label}<br />
-        ${form.password}
-      </p>
-        <input type="submit" value="Login">
-    </form>
-  </section>
+    <section id="login">
+        <h1>${request.registry.settings.get('pulpy.title')}</h1>
+        <form action="${request.route_url('login')}" method="post">
+            ${form.csrf_token}
+            %for m in request.session.pop_flash('error'):
+                <p class='error'>${m}<p>
+            %endfor
+            %for error in form.email.errors:
+                <p class='error'>${error}</p>
+            %endfor
+            <p>
+                ${form.email.label}<br />
+                ${form.email}
+            </p>
+            <p>
+                ${form.password.label}<br />
+                ${form.password}
+            </p>
+            <input type="submit" value="Login">
+        </form>
+    </section>
 </body>
 </html>

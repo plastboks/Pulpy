@@ -23,9 +23,9 @@ require(["commons"], function(util){});
 require(["ace/ace"], function(ace) {
     var textfield = $('#body');
     if(textfield.length) {
-      var data = textfield.val();
-      textfield.hide();
-      textfield.after('<div id="aceeditor"></div>')
+        var data = textfield.val();
+        textfield.hide();
+        textfield.after('<div id="aceeditor"></div>')
     }
     var editor = ace.edit('aceeditor');
 
