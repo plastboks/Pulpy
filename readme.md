@@ -1,6 +1,5 @@
-Pulpy
-=====
-## Pulpy - The Name
+Pulpy - The Name
+================
 The name originates from a little browsing on the Internet for synonyms of the word "remember". A hit got me to a synonym word site where synonyms for "remember" was listed. From there the route was Remember -> Mnemonic -> Nostalgic -> Mushy -> Pulpy. It might seem like a stretch, but I find the name both suiting and a bit abstract at the same time (and as a added bonus, it ends with py). So to conclude; the name is a bit abstract and I like it.
 
 Pulpy - The Purpose
@@ -21,7 +20,6 @@ Simple bullet list follows:
 * Revise notes for changes and history.
 * File attachments for notes.
 
-
 Pyramid
 =======
 This application is based on the [Pyramid Python Webframework](http://www.pylonsproject.org/)
@@ -36,6 +34,10 @@ Installation
   * run `pip install -e .` inside Pulpy directory
   * run `initialize_pulpy_db .ini`
   * run `pserve development.ini`
+
+Upgrading
+=========
+  * run `pip install --upgrade -e .`
 
 Deploy with nginx
 =================
